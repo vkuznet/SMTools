@@ -11,8 +11,9 @@ Requirements
 Tools
 -----
 
-- `system_monitor.py` script provides similar functionality as top::
+- `system_monitor.py` script provides similar functionality as top
 
+```
     Usage: system_monitor.py [options]
 
     Options:
@@ -21,5 +22,6 @@ Tools
       --sleep=SLEEP        sleep interval in sec for monitor activity
       --activity=ACTIVITY  activities: mem,cpu,threads
       --network            monitor network activity
+```
 
 - `analyzer_pid.R` script analyzes pid log data and produces standard set of plots
