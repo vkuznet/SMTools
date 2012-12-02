@@ -11,7 +11,7 @@ Requirements
 Tools
 -----
 
-- `system_monitor.py` script provides similar functionality as top
+- `system_monitor.py` script provides similar functionality as top::
 
     Usage: system_monitor.py [options]
 
