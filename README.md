@@ -11,9 +11,7 @@ Requirements
 Tools
 -----
 
-1. `system_monitor.py` script provides similar functionality as top
-
-.. doctest::
+- `system_monitor.py` script provides similar functionality as top
 
     Usage: system_monitor.py [options]
 
@@ -24,4 +22,4 @@ Tools
       --activity=ACTIVITY  activities: mem,cpu,threads
       --network            monitor network activity
 
-2. `analyzer_pid.R` script analyzes pid log data and produces standard set of plots
+- `analyzer_pid.R` script analyzes pid log data and produces standard set of plots
