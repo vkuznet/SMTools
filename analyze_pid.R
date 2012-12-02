@@ -41,26 +41,24 @@ cat("VMS summary (GB):\n")
 summary(data$vms)
 
 # make some plots
-pdf("summary.pdf")
+pdf("summary.pdf", onefile=T, paper="USr")
 par(mfrow=c(3,3), oma=c(0,0,2,0)) # c(N,M) N-rows, M-columns
 plot(data$time, data$cpu, xlab="Time", ylab="CPU percentage", type="l")
 plot(data$time, data$system, xlab="Time", ylab="System time", type="l")
 plot(data$time, data$user, xlab="Time", ylab="User time", type="l")
+plot(data$time, data$mem, xlab="Time", ylab="MEM percentage", type="l")
+plot(data$time, data$rss, xlab="Time", ylab="MEM RSS", type="l")
+plot(data$time, data$vms, xlab="Time", ylab="MEM VMS", type="l")
+plot(data$time, data$connections.CLOSE_WAIT, xlab="Time", ylab="close_wait", type="l")
+plot(data$time, data$connections.ESTABLISHED, xlab="Time", ylab="established", type="l")
+plot(data$time, data$threads, xlab="Time", ylab="# of threads", type="l")
+#plot(data$time, data$connections.LISTEN, xlab="Time", ylab="listen", type="l")
+#plot(data$time, data$files, xlab="Time", ylab="# of files", type="l")
 if  (!is.na(time.start)) {
     vec <- c(input, "from", toString(time.start), "to", toString(time.end))
     title(paste(vec, collapse=" "), outer=TRUE)
 } else {
     title(input, outer=TRUE)
 }
-plot(data$time, data$mem, xlab="Time", ylab="MEM percentage", type="l")
-plot(data$time, data$rss, xlab="Time", ylab="MEM RSS", type="l")
-plot(data$time, data$vms, xlab="Time", ylab="MEM VMS", type="l")
-plot(data$time, data$connections.CLOSE_WAIT, xlab="Time", ylab="close_wait", type="l")
-plot(data$time, data$connections.ESTABLISHED, xlab="Time", ylab="established", type="l")
-plot(data$time, data$connections.LISTEN, xlab="Time", ylab="listen", type="l")
-plot(data$time, data$threads, xlab="Time", ylab="# of threads", type="l")
-#plot(data$time, data$files, xlab="Time", ylab="# of files", type="l")
-plot(data$cpu, data$rss, xlab="CPU", ylab="RSS")
-plot(data$cpu, data$vms, xlab="CPU", ylab="VMS")
 dev.off()
 
