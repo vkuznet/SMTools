@@ -24,4 +24,4 @@ Tools
       --activity=ACTIVITY  activities: mem,cpu,threads
       --network            monitor network activity
 
-2. `data_analyzer.R` script analyzes given data and produces standard set of plots
+2. `analyzer_pid.R` script analyzes pid log data and produces standard set of plots
