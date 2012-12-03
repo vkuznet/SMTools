@@ -162,6 +162,7 @@ def main():
         with open(opts.out, 'w') as stream:
             for row in output(gen):
                 stream.write(row)
+                stream.write('\n')
     else:
         for row in output(gen):
             print row
