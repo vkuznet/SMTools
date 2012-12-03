@@ -14,18 +14,21 @@ import time
 import psutil
 from   optparse import OptionParser
 
-class TestOptionParser: 
+class TestOptionParser:
     "Test option parser"
     def __init__(self):
         self.parser = OptionParser()
-        self.parser.add_option("--pid", action="store", type="string", 
+        self.parser.add_option("--out", action="store", type="string",
+            default="", dest="out",
+            help="output file name")
+        self.parser.add_option("--pid", action="store", type="string",
             default="", dest="pid",
             help="pid of the process to monitor")
-        self.parser.add_option("--sleep", action="store", type="string", 
-            default=5, dest="sleep",
+        self.parser.add_option("--sleep", action="store", type="string",
+            default=1, dest="sleep",
             help="sleep interval in sec for monitor activity")
         activities = "cpu,mem,threads,user,system,rss,vms,connections,io,files"
-        self.parser.add_option("--activity", action="store", type="string", 
+        self.parser.add_option("--activity", action="store", type="string",
             default=activities,dest="activity",
             help="list of activities: %s" % activities)
         self.parser.add_option("--network", action="store_true",
@@ -131,6 +134,17 @@ def monitor_network(sleep=5):
         yield data
         time.sleep(sleep)
 
+def output(gen):
+    "Yield results from given generator"
+    columns  = ''
+    for data in gen:
+        if  not columns:
+            columns = data.keys()
+            columns.sort()
+            yield ', '.join(columns)
+        values = [str(data.get(c, 0)) for c in columns]
+        yield ', '.join(values)
+
 def main():
     "Main function"
     mgr      = TestOptionParser()
@@ -138,20 +152,19 @@ def main():
     activity = opts.activity.split(',')
     sleep    = int(opts.sleep)
     pid      = int(opts.pid) if opts.pid else 0
-    columns  = ''
     if  pid:
         gen = monitor_process(pid, activity, sleep)
     elif opts.network:
         gen = monitor_network(sleep)
     else:
         gen = monitor_system(sleep)
-    for data in gen:
-        if  not columns:
-            columns = data.keys()
-            columns.sort()
-            print ', '.join(columns)
-        values = [str(data.get(c, 0)) for c in columns]
-        print ', '.join(values)
+    if  opts.out:
+        with open(opts.out, 'w') as stream:
+            for row in output(gen):
+                stream.write(row)
+    else:
+        for row in output(gen):
+            print row
 
 if __name__ == '__main__':
     main()
