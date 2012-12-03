@@ -79,7 +79,7 @@ def monitor_process(pid, activity, sleep=5):
     cmd  = ' '.join(proc.cmdline)
     name = cmd.split('/')[-1]
     while True:
-        data = {'pid': pid, 'name': name, 'status': proc.status, 'timestamp': timestamp()}
+        data = {'pid': pid, 'status': proc.status, 'timestamp': timestamp()}
         mem_info = proc.get_memory_info()
         cpu_info = proc.get_cpu_times()
         for field in activity:
