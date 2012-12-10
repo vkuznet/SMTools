@@ -3,6 +3,10 @@
 # back-up files
 *.*~
 
+# R data
+.RData
+.Rhistory
+
 # C extensions
 *.so
 
