@@ -81,7 +81,7 @@ summary(data$vms)
 #   - mar: Specify the margins of the figure in number of lines
 #   - mai: Specify the margins of the figure in number of inches
 
-pdf("summary.pdf", onefile=T, paper="USr")
+pdf(paste(input, "pdf", sep="."), onefile=T, paper="USr")
 par(mfrow=c(3,3), oma=c(0,0,2,0))
 plot(data$time, data$cpu, xlab="Time", ylab="CPU percentage", type="l")
 plot(data$time, data$system, xlab="Time", ylab="System time", type="l")
@@ -89,10 +89,10 @@ plot(data$time, data$user, xlab="Time", ylab="User time", type="l")
 plot(data$time, data$mem, xlab="Time", ylab="MEM percentage", type="l")
 plot(data$time, data$rss, xlab="Time", ylab="MEM RSS", type="l")
 plot(data$time, data$vms, xlab="Time", ylab="MEM VMS", type="l")
-plot(data$time, data$connections.CLOSE_WAIT, xlab="Time", ylab="close_wait", type="l")
+#plot(data$time, data$connections.CLOSE_WAIT, xlab="Time", ylab="close_wait", type="l")
 plot(data$time, data$connections.ESTABLISHED, xlab="Time", ylab="established", type="l")
 plot(data$time, data$connections.LISTEN, xlab="Time", ylab="listen", type="l")
-#plot(data$time, data$files, xlab="Time", ylab="# of files", type="l")
+plot(data$time, data$files, xlab="Time", ylab="# of files", type="l")
 #plot(data$time, data$threads, xlab="Time", ylab="# of threads", type="l")
 if  (!is.na(time.start)) {
     vec <- c(input, "from", toString(time.start), "to", toString(time.end))
